@@ -24,6 +24,7 @@ void Paquet::Ajouter(Carte *carte)
     node->carte = carte;
     node->next = m_premier;
     m_premier = node;
+    count++;
 }
 
 void Paquet::AfficherPaquet()
@@ -45,7 +46,7 @@ void Paquet::AfficherPaquet()
 void Paquet::Melanger()
 {
     srand(time(NULL));
-    int n = 52;
+    int n = count;
     for (int i = 0; i < n; i++)
     {
         int r = i + (rand() % (n - i));
@@ -87,8 +88,8 @@ void Paquet::Repopuler()
     {
         for (int j = 1; j < 14; j++)
         {
-            Carte *carte = new Carte(j, i);
-            Ajouter(carte);
+            Carte *carte = new Carte{j, i};
+            Ajouter(carte); // 
         }
     }
 }

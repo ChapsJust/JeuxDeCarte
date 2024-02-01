@@ -33,6 +33,7 @@ void MainCarte::PigerMain(int nombre, Paquet *paquet)
         }
 
         m_premier = node;
+        paquet->setCount(-1);
     }
 }
 
@@ -47,6 +48,7 @@ void MainCarte::Discarter(int nombre)
         }
         Node *node = m_premier;
         m_premier = m_premier->next;
+        delete node->carte;
         delete node;
     }
 }

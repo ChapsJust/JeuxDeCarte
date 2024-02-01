@@ -12,6 +12,7 @@ class Paquet
 {
 private:
     Node *m_premier{nullptr};
+    int count{0};
 
 public:
     Paquet();
@@ -24,4 +25,7 @@ public:
     void AfficherPaquet();
     void Swap(Node *a, Node *b);
     void Repopuler();
+    void setCount(int nombre) { count+=nombre; }
 };
+
+
