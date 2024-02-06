@@ -33,7 +33,6 @@ void MainCarte::PigerMain(int nombre, Paquet *paquet)
         }
 
         m_premier = node;
-        paquet->setCount(-1);
     }
 }
 

@@ -1,5 +1,6 @@
 #include "Paquet.h"
 #include <iostream>
+#include <vector>
 
 Paquet::Paquet()
 {
@@ -43,24 +44,35 @@ void Paquet::AfficherPaquet()
     }
 }
 
-void Paquet::Melanger()
-{
-    srand(time(NULL));
-    int n = count;
-    for (int i = 0; i < n; i++)
-    {
-        int r = i + (rand() % (n - i));
-        Node *node = m_premier;
-        Node *node2 = m_premier;
-        for (int j = 0; j < i; j++)
-        {
-            node = node->next;
+// Méthode pour mélanger les cartes
+void Paquet::Melanger() {
+
+    // Utilise rand() pour mélanger les cartes
+    srand(time(NULL)); 
+    if (m_premier == nullptr || m_premier->next == nullptr) return; 
+
+    // Compte le nombre de cartes dans le paquet
+    Node* current = m_premier;
+    int length = 0;
+    while (current) {
+        length++;
+        current = current->next;
+    }
+
+    // Crée un tableau de pointeurs de nodes
+    std::vector<Node*> nodePointers(length);
+    current = m_premier;
+    for (int i = 0; i < length; i++) {
+        nodePointers[i] = current;
+        current = current->next;
+    }
+
+    // Mélange les cartes en utilisant fisher-yates
+    for (int i = 0; i < length - 1; i++) {
+        int j = i + rand() % (length - i); 
+        if (i != j) {
+            Swap(nodePointers[i], nodePointers[j]);
         }
-        for (int j = 0; j < r; j++)
-        {
-            node2 = node2->next;
-        }
-        Swap(node, node2);
     }
 }
 
@@ -92,12 +104,6 @@ void Paquet::Repopuler()
             Ajouter(carte); // 
         }
     }
-}
-void Paquet::Swap(Node *a, Node *b)
-{
-    Carte *temp = a->carte;
-    a->carte = b->carte;
-    b->carte = temp;
 }
 
 Node *Paquet::PigerPaquet()

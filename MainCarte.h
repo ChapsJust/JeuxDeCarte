@@ -1,11 +1,8 @@
 #pragma once
 #include "Paquet.h"
 
-class MainCarte
+class MainCarte: public Liste
 {
-private:
-    Node *m_premier{nullptr};
-
 public:
     MainCarte();
     MainCarte(int nombre, Paquet *paquet);

@@ -1,19 +1,11 @@
 #pragma once
 #include "Carte.h"
+#include "Liste.h"
 
-struct Node
-{
-    Carte *carte;
-    Node *next;
-    Node *back;
-};
-
-class Paquet
+class Paquet: public Liste
 {
 private:
     Node *m_premier{nullptr};
-    int count{0};
-
 public:
     Paquet();
     ~Paquet();
@@ -23,9 +15,7 @@ public:
     void Renitialiser();
     void Ajouter(Carte *carte);
     void AfficherPaquet();
-    void Swap(Node *a, Node *b);
     void Repopuler();
-    void setCount(int nombre) { count+=nombre; }
 };
 
 
